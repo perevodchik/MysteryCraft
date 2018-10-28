@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " L ",
+    " L ",
+    " D "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:gold_block"
+    },
+    "D": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "rpg-c:sun_sword",
+    "count": 1
+  }
+}

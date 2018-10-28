@@ -1,0 +1,10 @@
+[
+{
+  "modid": "rpc-c",
+  "name": "RPG.Craft",
+  "description": "Example placeholder mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "authorList": ["perevodchik"]
+}
+]
