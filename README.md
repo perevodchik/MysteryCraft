@@ -1,7 +1,8 @@
 # RPGCraft
 
-dungeons              |
-skills                |
-bosses                |
-legendary items       |
-new world             |
+- dungeons              |
+- skills                |
+- bosses                |
+- legendary items       |
+- new world             |
+- quests                |
