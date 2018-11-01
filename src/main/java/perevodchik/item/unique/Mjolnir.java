@@ -13,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import perevodchik.item.ItemHammer;
 
+import javax.annotation.Nonnull;
+
 public class Mjolnir extends ItemHammer {
 
     public Mjolnir(ToolMaterial material, CreativeTabs tab, String name) {
@@ -27,8 +29,10 @@ public class Mjolnir extends ItemHammer {
         return false;
     }
 
+    @Nonnull
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
+        ItemStack stack = playerIn.getHeldItem(handIn);
         BlockPos LightingBoltPos = new BlockPos(playerIn);
         BlockPos.MutableBlockPos LighttingBoltMutablePos = new BlockPos.MutableBlockPos(LightingBoltPos);
 
@@ -59,7 +63,9 @@ public class Mjolnir extends ItemHammer {
         }
 
         EntityLightningBolt bolt = new EntityLightningBolt(worldIn, LighttingBoltMutablePos.getX(), LighttingBoltMutablePos.getY(), LighttingBoltMutablePos.getZ(), false);
-        worldIn.spawnEntity(bolt);
+
+        stack.damageItem(1, playerIn);
+
         return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
     }
 }

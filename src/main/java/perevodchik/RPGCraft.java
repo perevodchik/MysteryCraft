@@ -6,12 +6,13 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import perevodchik.proxy.CommonProxy;
+import perevodchik.util.Smell;
 
 @Mod(modid = RPGCraft.MODID,
     name = RPGCraft.NAME,
     version = RPGCraft.VERSION)
 public class RPGCraft {
-    static final String MODID = "rpg-c";
+    public static final String MODID = "rpg-c";
     static final String NAME = "RPG Craft";
     static final String VERSION = "0.1";
     
@@ -30,6 +31,7 @@ public class RPGCraft {
     @Mod.EventHandler
     public void init(FMLInitializationEvent e){
         System.out.println("\\u001B[32m" + "mod init" + "\u001B[0m");
+        Smell.init();
         proxy.init(e);
     }
 

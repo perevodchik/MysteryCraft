@@ -1,4 +1,4 @@
-package perevodchik.item.unique;
+package perevodchik.item.weapon;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;

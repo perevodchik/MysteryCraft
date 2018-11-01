@@ -10,8 +10,10 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import perevodchik.blocks.*;
-import perevodchik.item.other.ElectrumStick;
+import perevodchik.item.other.*;
 import perevodchik.item.unique.*;
+
+import javax.annotation.Nonnull;
 
 import static perevodchik.util.CreativeTabs.EgyptTab;
 import static perevodchik.util.CreativeTabs.SkandinavTab;
@@ -19,18 +21,24 @@ import static perevodchik.util.CreativeTabs.SkandinavTab;
 public class RPGCraftRegistry {
 
     private static Block Neel_Sand = new NeelSand(Material.SAND,"Neel sand", EgyptTab);
-    private static Block MyfrilOre = new MyfrilOre(Material.ROCK,"Myfril ore", SkandinavTab);
+    static Block MyfrilOre = new MyfrilOre(Material.ROCK,"Myfril ore", SkandinavTab);
     private static Block MyfrilBlock = new MyfrilBlock(Material.ROCK,"Myfril block", SkandinavTab);
-    private static Block StarOre = new StarOre(Material.ROCK,"Star ore", SkandinavTab);
+    static Block StarOre = new StarOre(Material.ROCK,"Star ore", SkandinavTab);
     private static Block StarBlock = new StarBlock(Material.ROCK,"Star block", SkandinavTab);
-    private static Block OryhalkOre = new OryhalkOre(Material.ROCK,"Oryhalk ore", SkandinavTab);
+    static Block OryhalkOre = new OryhalkOre(Material.ROCK,"Oryhalk ore", SkandinavTab);
     private static Block OryhalkBlock = new OryhalkBlock(Material.ROCK,"Oryhalk block", SkandinavTab);
-    private static Block ElectrumOre = new ElectrumOre(Material.ROCK,"Electrum ore", SkandinavTab);
+    static Block ElectrumOre = new ElectrumOre(Material.ROCK,"Electrum ore", SkandinavTab);
     private static Block ElectrumBlock = new ElectrumBlock(Material.ROCK,"Electrum block", SkandinavTab);
     private static Block MagicWood = new MagicWood(Material.ROCK,"Magic wood", SkandinavTab);
 
-    private static SunSword SunSword = new SunSword(Materials.SUN_IRON, SkandinavTab,"Sun Sword");
-    //private static FreiasBow FreiaBow = new FreiasBow(SkandinavTab, "Freyias bow");
+    static SunIgnot SunIgnot = new SunIgnot(SkandinavTab, "Sun ignot");
+    static ElectrumIgnot ElectrumIgnot = new ElectrumIgnot(SkandinavTab, "Electrum ignot");
+    static MyfrilIgnot MyfrilIgnot = new MyfrilIgnot(SkandinavTab, "Myfril ignot");
+    static OryhalkIgnot OryhalkIgnot = new OryhalkIgnot(SkandinavTab, "Oryhalk ignot");
+    static StarIgnot StarIgnot = new StarIgnot(SkandinavTab, "Star ignot");
+
+    static SunSword SunSword = new SunSword(Materials.SUN_IRON, SkandinavTab,"Sun Sword");
+    public static FreiasBow FreiaBow = new FreiasBow(SkandinavTab, "Freyias bow");
     //private static Rapier Rapier = new Rapier(Item.ToolMaterial.IRON, SkandinavTab, "Rapier");
     private static ReaperScythe ReaperScythe = new ReaperScythe(Materials.SOUL_STEEL, SkandinavTab, "Reaper Scythe");
     private static StoneFish StoneFish = new StoneFish(Item.ToolMaterial.STONE, SkandinavTab, "Stone Fish");
@@ -39,6 +47,8 @@ public class RPGCraftRegistry {
     private static IkarusWing IkarusWing = new IkarusWing(SkandinavTab, "Ikarus wing");
 
     private static ElectrumStick ElectrumStick = new ElectrumStick(SkandinavTab, "Electrum stick");
+
+    private static GlassWatch GlassWatch = new GlassWatch(SkandinavTab, "Glass Watch");
 
     public static void register() {
         setRegister();
@@ -67,13 +77,21 @@ public class RPGCraftRegistry {
         setRender(MagicWood);
 
         setRender(ElectrumStick);
+        setRender(SunIgnot);
+        setRender(ElectrumIgnot);
+        setRender(MyfrilIgnot);
+        setRender(OryhalkIgnot);
+        setRender(StarIgnot);
 
         setRender(SunSword);
         setRender(ReaperScythe);
         setRender(StoneFish);
         setRender(Mjolnir);
+        setRender(FreiaBow);
 
         setRender(IkarusWing);
+
+        setRender(GlassWatch);
     }
 
     private static void setRegister(Block block, String RegistryName) {
@@ -86,10 +104,19 @@ public class RPGCraftRegistry {
         ForgeRegistries.ITEMS.register(ReaperScythe);
         ForgeRegistries.ITEMS.register(StoneFish);
         ForgeRegistries.ITEMS.register(Mjolnir);
+        ForgeRegistries.ITEMS.register(FreiaBow);
 
         ForgeRegistries.ITEMS.register(IkarusWing);
 
         ForgeRegistries.ITEMS.register(ElectrumStick);
+        ForgeRegistries.ITEMS.register(SunIgnot);
+        ForgeRegistries.ITEMS.register(ElectrumIgnot);
+        ForgeRegistries.ITEMS.register(MyfrilIgnot);
+        ForgeRegistries.ITEMS.register(OryhalkIgnot);
+        ForgeRegistries.ITEMS.register(StarIgnot);
+
+
+        ForgeRegistries.ITEMS.register(GlassWatch);
     }
 
     @SideOnly(Side.CLIENT)
