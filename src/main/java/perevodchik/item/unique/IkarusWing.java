@@ -10,14 +10,13 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import perevodchik.item.ItemWings;
-import perevodchik.util.RarityItems;
+import perevodchik.enums.RarityItemsList;
 
 import javax.annotation.Nonnull;
 
 public class IkarusWing extends Item {
 
-    public IkarusWing(CreativeTabs tab, String name) {
+    public IkarusWing(String name, CreativeTabs tab) {
         this.setRegistryName("ikarus_wing");
         this.setUnlocalizedName(name);
         this.setMaxStackSize(1);
@@ -53,7 +52,7 @@ public class IkarusWing extends Item {
 
     @Nonnull
     public EnumRarity getRarity(ItemStack stack) {
-        return RarityItems.RARITY_LEGENDARY;
+        return RarityItemsList.RARITY_LEGENDARY;
     }
 
 }

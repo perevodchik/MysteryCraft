@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "gold_ore" }
+        "normal": { "model": "rpg-c:star_ore" },
+        "inventory": { "model": "rpg-c:star_ore" }
     }
 }

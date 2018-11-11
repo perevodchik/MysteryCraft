@@ -3,10 +3,10 @@ package perevodchik.item.other;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class SunIgnot extends Item {
+public class OryhalkIngot extends Item {
 
-    public SunIgnot(CreativeTabs tab, String name) {
-        this.setRegistryName("sun_ignot");
+    public OryhalkIngot (String name, CreativeTabs tab) {
+        this.setRegistryName("oryhalk_ingot");
         this.setUnlocalizedName(name);
         this.setCreativeTab(tab);
     }

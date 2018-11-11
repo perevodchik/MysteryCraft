@@ -3,10 +3,10 @@ package perevodchik.item.other;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-public class MyfrilIgnot extends Item {
+public class ElectrumIngot extends Item {
 
-    public MyfrilIgnot (CreativeTabs tab, String name) {
-        this.setRegistryName("myfril_ignot");
+    public ElectrumIngot (String name, CreativeTabs tab) {
+        this.setRegistryName("electrum_ingot");
         this.setUnlocalizedName(name);
         this.setCreativeTab(tab);
     }

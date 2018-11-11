@@ -1,6 +1,5 @@
 package perevodchik.item.unique;
 
-import com.google.common.eventbus.Subscribe;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,7 +14,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import perevodchik.util.RarityItems;
+import perevodchik.enums.RarityItemsList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -23,7 +22,7 @@ import java.util.List;
 
 public class GlassWatch extends Item {
 
-    public GlassWatch(CreativeTabs tab, String name){
+    public GlassWatch(String name, CreativeTabs tab){
         this.canRepair = false;
         this.setMaxStackSize(1);
         this.setMaxDamage(300);
@@ -47,13 +46,16 @@ public class GlassWatch extends Item {
     }
 
     @Nonnull
-    @Subscribe
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ((EntityPlayerSP) playerIn).sendChatMessage("Гравець використав силу Кронуса, й змінив час...");
-        if(worldIn.isDaytime()) {
-            worldIn.setWorldTime(14000);
-        } else worldIn.setWorldTime(1000);
+        ((EntityPlayerSP) playerIn).sendChatMessage(String.valueOf(worldIn.getTotalWorldTime()));
+
+        if(worldIn.getWorldTime() > 0 && worldIn.getWorldTime() < 12200) {
+            worldIn.setWorldTime(15000);
+        } else if (worldIn.getWorldTime() > 12200){
+            worldIn.setWorldTime(24000);
+        }
 
 
         ItemStack stack = playerIn.getHeldItem(handIn);
@@ -63,7 +65,7 @@ public class GlassWatch extends Item {
 
     @Nonnull
     public EnumRarity getRarity(ItemStack stack) {
-        return RarityItems.RARITY_LEGENDARY;
+        return RarityItemsList.RARITY_LEGENDARY;
     }
 
 }

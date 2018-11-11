@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import perevodchik.item.ItemScythe;
-import perevodchik.util.RarityItems;
+import perevodchik.enums.RarityItemsList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ReaperScythe extends ItemScythe {
     private boolean isStrong = false;
 
-    public ReaperScythe(ToolMaterial material, CreativeTabs tab, String name) {
+    public ReaperScythe(ToolMaterial material, String name, CreativeTabs tab) {
         super(material);
         this.setRegistryName("reaper_scythe");
         this.setUnlocalizedName(name);
@@ -53,6 +53,6 @@ public class ReaperScythe extends ItemScythe {
 
     @Nonnull
     public EnumRarity getRarity(ItemStack stack) {
-        return RarityItems.RARITY_LEGENDARY;
+        return RarityItemsList.RARITY_LEGENDARY;
     }
 }

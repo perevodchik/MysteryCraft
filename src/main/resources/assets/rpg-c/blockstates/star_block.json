@@ -1,1 +1,6 @@
-le
+{
+  "variants": {
+    "normal": { "model": "rpg-c:star_block" },
+    "inventory": { "model": "rpg-c:star_block" }
+  }
+}

@@ -1,5 +1,6 @@
 {
   "variants": {
-    "normal": { "model": "rpg-c:electrum_block" }
+    "normal": { "model": "rpg-c:electrum_block" },
+    "inventory": { "model": "rpg-c:electrum_block" }
   }
 }

@@ -17,7 +17,7 @@ import javax.annotation.Nonnull;
 
 public class Mjolnir extends ItemHammer {
 
-    public Mjolnir(ToolMaterial material, CreativeTabs tab, String name) {
+    public Mjolnir(ToolMaterial material, String name, CreativeTabs tab) {
         super(material);
         this.setRegistryName("mjolnir");
         this.setUnlocalizedName(name);
@@ -32,7 +32,7 @@ public class Mjolnir extends ItemHammer {
     @Nonnull
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-        ItemStack stack = playerIn.getHeldItem(handIn);
+        /*ItemStack stack = playerIn.getHeldItem(handIn);
         BlockPos LightingBoltPos = new BlockPos(playerIn);
         BlockPos.MutableBlockPos LighttingBoltMutablePos = new BlockPos.MutableBlockPos(LightingBoltPos);
 
@@ -64,7 +64,7 @@ public class Mjolnir extends ItemHammer {
 
         EntityLightningBolt bolt = new EntityLightningBolt(worldIn, LighttingBoltMutablePos.getX(), LighttingBoltMutablePos.getY(), LighttingBoltMutablePos.getZ(), false);
 
-        stack.damageItem(1, playerIn);
+        stack.damageItem(1, playerIn);*/
 
         return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
     }

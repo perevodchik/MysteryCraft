@@ -1,4 +1,4 @@
-package perevodchik.util;
+package perevodchik.util.registers;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;

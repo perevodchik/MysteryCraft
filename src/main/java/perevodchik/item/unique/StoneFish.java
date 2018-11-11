@@ -20,7 +20,7 @@ import java.util.List;
 
 public class StoneFish  extends ItemAxe {
 
-    public StoneFish(ToolMaterial material, CreativeTabs tab, String name) {
+    public StoneFish(ToolMaterial material, String name, CreativeTabs tab) {
         super(material);
         this.setRegistryName("stone_fish");
         this.setUnlocalizedName(name);

@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 public class FreiasBow extends ItemBow {
 
-    public FreiasBow(CreativeTabs tab, String name) {
+    public FreiasBow(String name, CreativeTabs tab) {
         this.setRegistryName("freyias_bow");
         this.setUnlocalizedName(name);
         this.setCreativeTab(tab);

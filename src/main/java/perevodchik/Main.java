@@ -5,16 +5,22 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import perevodchik.event.ProfessionsEvent;
 import perevodchik.proxy.CommonProxy;
-import perevodchik.util.Smell;
+import perevodchik.util.registers.SmellRegister;
+import perevodchik.world.OreGen;
 
-@Mod(modid = RPGCraft.MODID,
-    name = RPGCraft.NAME,
-    version = RPGCraft.VERSION)
-public class RPGCraft {
+@Mod(modid = Main.MODID,
+    name = Main.NAME,
+    version = Main.VERSION)
+public class Main {
     public static final String MODID = "rpg-c";
     static final String NAME = "RPG Craft";
     static final String VERSION = "0.1";
+
+    @Mod.Instance("rpg-c")
+    public static Main instance;
     
     @SidedProxy(
             clientSide = "perevodchik.proxy.ClientProxy",
@@ -24,20 +30,20 @@ public class RPGCraft {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e){
-        System.out.println("\\u001B[32m" + "mod preInit" + "\u001B[0m");
+        GameRegistry.registerWorldGenerator(new OreGen(),3);
         proxy.preInit(e);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e){
-        System.out.println("\\u001B[32m" + "mod init" + "\u001B[0m");
-        Smell.init();
+        SmellRegister.init();
+        //EntityRegistry.initModels();
+        ProfessionsEvent.associateCareersAndTrades();
         proxy.init(e);
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e){
-        System.out.println("\\u001B[32m" + "mod postInit" + "\u001B[0m");
         proxy.postInit(e);
     }
 

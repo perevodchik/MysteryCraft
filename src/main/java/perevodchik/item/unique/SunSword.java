@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import perevodchik.util.RarityItems;
+import perevodchik.enums.RarityItemsList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -25,7 +25,7 @@ import java.util.List;
 public class SunSword extends ItemSword {
     private boolean isStrong = false;
 
-    public SunSword(ToolMaterial material, CreativeTabs tab, String name) {
+    public SunSword(ToolMaterial material, String name, CreativeTabs tab) {
         super(material);
         this.setRegistryName("sun_sword");
         this.setUnlocalizedName(name);
@@ -70,6 +70,6 @@ public class SunSword extends ItemSword {
 
     @Nonnull
     public EnumRarity getRarity(ItemStack stack) {
-        return RarityItems.RARITY_LEGENDARY;
+        return RarityItemsList.RARITY_LEGENDARY;
     }
 }
