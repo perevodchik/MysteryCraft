@@ -24,6 +24,11 @@ public class OreGen implements IWorldGenerator {
         generateOre(ObjList.ElectrumOre.getDefaultState(), world, rand, chunkX, chunkZ, 40, 50, rand.nextInt(5)+2, 11);
         generateOre(ObjList.StarOre.getDefaultState(), world, rand, chunkX, chunkZ, 40, 50, rand.nextInt(5)+2, 11);
         generateOre(ObjList.OryhalkOre.getDefaultState(), world, rand, chunkX, chunkZ, 40, 50, rand.nextInt(5)+2, 11);
+
+        // tree
+
+        IBlockState blockStateMagicWood = ObjList.MagicWood.getDefaultState();
+
     }
 
     private void generateNether(Random rand, int chunkX, int chunkZ, World world) {

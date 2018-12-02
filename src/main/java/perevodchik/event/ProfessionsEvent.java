@@ -45,8 +45,8 @@ public class ProfessionsEvent {
             registry.register(mysterious_stranger);
             warrior = new VillagerRegistry.VillagerProfession(
                             Main.MODID+":warrior",
-                            Main.MODID+":textures/entity/skin_herobrine.png",
-                            Main.MODID+":textures/entity/skin_herobrine.png");
+                            Main.MODID+":textures/entity/mod_villager.png",
+                            Main.MODID+":textures/entity/mod_villager.png");
             registry.register(warrior);
         }
     }
