@@ -56,6 +56,10 @@ public class EntityVillagerDeffer extends EntityMob {
         return this.village;
     }
 
+    public void setVillage(Village v) {
+        this.village = v;
+    }
+
     @Nullable
     protected Item getDropItem()
     {

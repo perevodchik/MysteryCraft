@@ -8,8 +8,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import perevodchik.event.EntityRegistry;
-import perevodchik.event.ProfessionsEvent;
+import perevodchik.event.eventHandler.EntityRegistryEvent;
+import perevodchik.event.eventHandler.ProfessionsEvent;
 import perevodchik.proxy.CommonProxy;
 import perevodchik.util.registers.SmellRegister;
 import perevodchik.village.VillageMapGenMod;
@@ -17,6 +17,8 @@ import perevodchik.village.VillageMod;
 import perevodchik.village.text.TestVillageCreationHandler;
 import perevodchik.world.OreGen;
 import perevodchik.world.StructureGenerate;
+import perevodchik.world.structure.MapGenWorldStructure;
+import perevodchik.world.structure.WorldStructurePieces;
 
 @Mod(modid = Main.MODID,
     name = Main.NAME,
@@ -43,7 +45,7 @@ public class Main {
     public void preInit(FMLPreInitializationEvent e){
         GameRegistry.registerWorldGenerator(new OreGen(),3);
         GameRegistry.registerWorldGenerator(new StructureGenerate(), 3);
-        EntityRegistry.initModels();
+        EntityRegistryEvent.initModels();
         proxy.preInit(e);
     }
 
@@ -58,6 +60,11 @@ public class Main {
 
         VillageMod.registerVillagePieces();
         MapGenStructureIO.registerStructure(VillageMapGenMod.Start.class, "mod_village");
+        //MapGenStructureIO.registerStructure(StructureCaravan.class, "caravan");
+        //MapGenStructureIO.registerStructureComponent(StructureCaravan.class, "caravan");
+        WorldStructurePieces.registerScatteredFeaturePieces();
+        MapGenStructureIO.registerStructure(MapGenWorldStructure.Start.class, "world_structures");
+
 
         proxy.init(e);
     }

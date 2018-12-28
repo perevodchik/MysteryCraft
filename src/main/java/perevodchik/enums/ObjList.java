@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import perevodchik.blocks.*;
 import perevodchik.item.other.*;
 import perevodchik.item.tool.MagickStick;
+import perevodchik.item.tool.QuestBook;
 import perevodchik.item.unique.*;
 
 import static perevodchik.enums.CreativeTabsList.*;
@@ -30,13 +31,14 @@ public class ObjList {
     public static ElectrumStick ElectrumStick = new ElectrumStick("Electrum stick", MTabItems);
 
     public static perevodchik.item.unique.SunSword SunSword = new SunSword(MaterialList.SUN_IRON,"Sun Sword", MTabEquip);
-    public static FreiasBow FreiaBow = new FreiasBow("Freyias bow", MTabEquip);
+    //public static FreiasBow FreiaBow = new FreiasBow("Freyias bow", MTabEquip);
     //private static Rapier Rapier = new Rapier(Item.ToolMaterial.IRON, "Rapier", MTabEquip);
     public static perevodchik.item.unique.ReaperScythe ReaperScythe = new ReaperScythe(MaterialList.SOUL_STEEL, "Reaper Scythe", MTabEquip);
     public static perevodchik.item.unique.StoneFish StoneFish = new StoneFish(Item.ToolMaterial.IRON,"Stone Fish", MTabEquip);
     public static perevodchik.item.unique.Mjolnir Mjolnir = new Mjolnir(MaterialList.STAR, "Mjolnir", MTabEquip);
 
     public static perevodchik.item.tool.MagickStick MagickStick = new MagickStick("Magick stick", MTabTools);
+    public static perevodchik.item.tool.QuestBook QuestBook = new QuestBook("Quest book", MTabTools);
 
     public static IkarusWing IkarusWing = new IkarusWing("Ikarus wing", MTabEquip);
 

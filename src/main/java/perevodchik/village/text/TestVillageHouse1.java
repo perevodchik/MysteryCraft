@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import perevodchik.event.ProfessionsEvent;
+import perevodchik.event.eventHandler.ProfessionsEvent;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -41,7 +41,7 @@ public class TestVillageHouse1 extends StructureVillagePieces.Village{
     }
 
     /**
-     * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+     * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
      * Mineshafts at the end, it adds Fences...
      *
      * @param parWorld the par world

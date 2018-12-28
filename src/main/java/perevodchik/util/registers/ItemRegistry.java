@@ -47,7 +47,7 @@ public class ItemRegistry {
         setRender(ObjList.ReaperScythe);
         setRender(ObjList.StoneFish);
         setRender(ObjList.Mjolnir);
-        setRender(ObjList.FreiaBow);
+        //setRender(ObjList.FreiaBow);
 
         setRender(ObjList.MagickStick);
 
@@ -66,10 +66,11 @@ public class ItemRegistry {
         ForgeRegistries.ITEMS.register(ObjList.ReaperScythe);
         ForgeRegistries.ITEMS.register(ObjList.StoneFish);
         ForgeRegistries.ITEMS.register(ObjList.Mjolnir);
-        ForgeRegistries.ITEMS.register(ObjList.FreiaBow);
+        //ForgeRegistries.ITEMS.register(ObjList.FreiaBow);
 
         ForgeRegistries.ITEMS.register(ObjList.IkarusWing);
 
+        ForgeRegistries.ITEMS.register(ObjList.QuestBook);
         ForgeRegistries.ITEMS.register(ObjList.MagickStick);
 
         ForgeRegistries.ITEMS.register(ObjList.ElectrumStick);

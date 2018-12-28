@@ -1,4 +1,6 @@
 package perevodchik.item;
 
-public class ItemScepter {
+import net.minecraft.item.Item;
+
+public class ItemScepter extends Item {
 }

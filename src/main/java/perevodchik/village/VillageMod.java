@@ -20,8 +20,6 @@ import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.template.TemplateManager;
-import perevodchik.entity.EntityVillagerDeffer;
-import perevodchik.entity.villager.EntityModVillager;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -40,8 +38,8 @@ public class VillageMod {
         //MapGenStructureIO.registerStructureComponent(VillageMod.GuardHouse.class, "ViGH");//**
         MapGenStructureIO.registerStructureComponent(VillageMod.Shrine.class, "ViSH");//
         //MapGenStructureIO.registerStructureComponent(VillageMod.SmallHut.class, "ViSmH");//**
-        //MapGenStructureIO.registerStructureComponent(VillageMod.ConsulHouse.class, "ViST");//**
-        //MapGenStructureIO.registerStructureComponent(VillageMod.BathHouse.class, "ViS");//**
+        MapGenStructureIO.registerStructureComponent(VillageMod.BigField.class, "ViBF");//**
+        MapGenStructureIO.registerStructureComponent(VillageMod.FarmHouse.class, "ViFH");//**
         MapGenStructureIO.registerStructureComponent(VillageMod.Start.class, "ViStart");//**
         MapGenStructureIO.registerStructureComponent(VillageMod.Path.class, "ViPath");//**
         MapGenStructureIO.registerStructureComponent(VillageMod.House.class, "ViHome");//**
@@ -56,9 +54,9 @@ public class VillageMod {
         list.add(new VillageMod.PieceWeight(VillageMod.House.class, 10, MathHelper.getInt(random, 0, 1 + size)));
         list.add(new VillageMod.PieceWeight(VillageMod.House2.class, 15, MathHelper.getInt(random, 2, 1 + size)));
         list.add(new VillageMod.PieceWeight(VillageMod.Field2.class, 5, MathHelper.getInt(random, 2 + size, 2 + size * 2)));
-        /*list.add(new VillageMod.PieceWeight(VillageMod.SmallHut.class, 3, MathHelper.getInt(random, 2 + size, 5 + size * 3)));
-        list.add(new VillageMod.PieceWeight(VillageMod.TallHouse.class, 15, MathHelper.getInt(random, 0 + size, 2 + size)));
-        list.add(new VillageMod.PieceWeight(VillageMod.Field1.class, 3, MathHelper.getInt(random, 1 + size, 4 + size)));
+        list.add(new VillageMod.PieceWeight(VillageMod.FarmHouse.class, 3, MathHelper.getInt(random, 2 + size, 5 + size * 3)));
+        list.add(new VillageMod.PieceWeight(VillageMod.BigField.class, 15, MathHelper.getInt(random, 1 + size, 2 + size)));
+        /*list.add(new VillageMod.PieceWeight(VillageMod.Field1.class, 3, MathHelper.getInt(random, 1 + size, 4 + size)));
         list.add(new VillageMod.PieceWeight(VillageMod.Field2.class, 3, MathHelper.getInt(random, 2 + size, 4 + size * 2)));
         list.add(new VillageMod.PieceWeight(VillageMod.BathHouse.class, 15, MathHelper.getInt(random, 0, 1 + size)));
         list.add(new VillageMod.PieceWeight(VillageMod.GuardHouse.class, 8, MathHelper.getInt(random, 0 + size, 3 + size * 2)));*/
@@ -106,6 +104,14 @@ public class VillageMod {
         else if (oclass == VillageMod.Field2.class)
         {
             StructurePieces$village = VillageMod.Field2.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
+        }
+        else if (oclass == VillageMod.BigField.class)
+        {
+            StructurePieces$village = VillageMod.BigField.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
+        }
+        else if (oclass == VillageMod.FarmHouse.class)
+        {
+            StructurePieces$village = VillageMod.FarmHouse.createPiece(start, structureComponents, rand, structureMinX, structureMinY, structureMinZ, facing, componentType);
         }
 
         return StructurePieces$village;
@@ -259,7 +265,6 @@ public class VillageMod {
         boolean isZombieInfested;
         boolean isBanditInfested;
         EnumFacing front;
-        EntityModVillager ruler;
         VillageMod.Start startPiece;
 
         Village()
@@ -275,7 +280,6 @@ public class VillageMod {
                 this.structureType = start.structureType;
                 this.isZombieInfested = start.isZombieInfested;
                 this.isBanditInfested = start.isBanditInfested;
-                this.ruler = null;
                 startPiece = start;
             }
         }
@@ -314,7 +318,7 @@ public class VillageMod {
          * Gets the next village component, with the bounding box shifted -1 in the X and Z direction.
          */
         @Nullable
-        public StructureComponent getNextComponentNN(VillageMod.Start start, List<StructureComponent> structureComponents, Random rand, int p_74891_4_, int p_74891_5_)
+        StructureComponent getNextComponentNN(VillageMod.Start start, List<StructureComponent> structureComponents, Random rand, int p_74891_4_, int p_74891_5_)
         {
             EnumFacing enumfacing = this.getCoordBaseMode();
 
@@ -343,7 +347,7 @@ public class VillageMod {
          * Gets the next village component, with the bounding box shifted +1 in the X and Z direction.
          */
         @Nullable
-        public StructureComponent getNextComponentPP(VillageMod.Start start, List<StructureComponent> structureComponents, Random rand, int p_74894_4_, int p_74894_5_)
+        StructureComponent getNextComponentPP(VillageMod.Start start, List<StructureComponent> structureComponents, Random rand, int p_74894_4_, int p_74894_5_)
         {
             EnumFacing enumfacing = this.getCoordBaseMode();
 
@@ -372,7 +376,7 @@ public class VillageMod {
          * Discover the y coordinate that will serve as the ground level of the supplied BoundingBox. (A median of
          * all the levels in the BB's horizontal rectangle).
          */
-        public int getAverageGroundLevel(World worldIn, StructureBoundingBox structurebb)
+        int getAverageGroundLevel(World worldIn, StructureBoundingBox structurebb)
         {
             int i = 0;
             int j = 0;
@@ -402,7 +406,7 @@ public class VillageMod {
             }
         }
 
-        public static boolean canVillageGoDeeper(StructureBoundingBox structurebb)
+        static boolean canVillageGoDeeper(StructureBoundingBox structurebb)
         {
             return structurebb != null && structurebb.minY > 10;
         }
@@ -411,7 +415,7 @@ public class VillageMod {
          * Spawns a number of villagers in this component. Parameters: world, component bounding box, x offset, y
          * offset, z offset, number of villagers
          */
-        public void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count)
+        void spawnVillagers(World worldIn, StructureBoundingBox structurebb, int x, int y, int z, int count)
         {
             if (this.villagersSpawned < count)
             {
@@ -459,7 +463,7 @@ public class VillageMod {
             return net.minecraftforge.fml.common.registry.VillagerRegistry.getById(chooseProfession(count, net.minecraftforge.fml.common.registry.VillagerRegistry.getId(prof)));
         }
 
-        public IBlockState getBiomeSpecificBlockState(IBlockState blockstateIn)
+        IBlockState getBiomeSpecificBlockState(IBlockState blockstateIn)
         {
             net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID event = new net.minecraftforge.event.terraingen.BiomeEvent.GetVillageBlockID(startPiece == null ? null : startPiece.biome, blockstateIn);
             net.minecraftforge.common.MinecraftForge.TERRAIN_GEN_BUS.post(event);
@@ -542,7 +546,7 @@ public class VillageMod {
         int terrainType;
         PieceWeight lastPlaced;
         /**
-         * Contains List of all spawnable Structure Piece Weights. If no more Pieces of a type can be spawned, they
+         * Contains List of all spawnable StructureDunge Piece Weights. If no more Pieces of a type can be spawned, they
          * are removed from this list
          */
         List<VillageMod.PieceWeight> structureVillageWeightedPieceList;
@@ -565,6 +569,7 @@ public class VillageMod {
             this.startPiece = this;
 
             System.out.println("v ********************************************************************************** 1");
+            System.out.println("********************************************************************************** x " + x + " y " + y);
 
             if (biome instanceof BiomeDesert)
             {
@@ -607,7 +612,7 @@ public class VillageMod {
         }
 
         /**
-         * Initiates construction of the Structure Component picked, at the current Location of StructGen
+         * Initiates construction of the StructureDunge Component picked, at the current Location of StructGen
          */
         public void buildComponent(StructureComponent componentIn, List<StructureComponent> listIn, Random rand)
         {
@@ -618,7 +623,7 @@ public class VillageMod {
         }
 
         /**
-         * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
          * Mineshafts at the end, it adds Fences...
          */
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
@@ -681,7 +686,12 @@ public class VillageMod {
         }
 
         private void spawnEntity(World world, double x, double y, double z) {
-            EntityVillagerDeffer e = new EntityVillagerDeffer(world, new BlockPos(x, y, z));
+            /*EntityVillagerDeffer e = new EntityVillagerDeffer(world, new BlockPos(x, y, z));
+            net.minecraft.village.Village v = world.getVillageCollection().getNearestVillage(new BlockPos(x, y, z), 20);
+            e.setVillage(v);
+            VillageList.blockedVillageList.put(v, true);
+            System.out.println("its ok");
+            System.out.println(v.getCenter());*/
         }
     }
 
@@ -800,7 +810,7 @@ public class VillageMod {
         }
 
         /**
-         * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
          * Mineshafts at the end, it adds Fences...
          */
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
@@ -938,7 +948,7 @@ public class VillageMod {
         }
 
         /**
-         * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
          * Mineshafts at the end, it adds Fences...
          */
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
@@ -1057,6 +1067,131 @@ public class VillageMod {
         }
     }
 
+    public static class FarmHouse extends VillageMod.Village
+    {
+        /** First crop type for this field. */
+        private Block cropTypeA;
+        /** Second crop type for this field. */
+        private Block cropTypeB;
+
+        public FarmHouse()
+        {
+        }
+
+        public FarmHouse(VillageMod.Start start, int type, Random rand, StructureBoundingBox boundingBox, EnumFacing facing)
+        {
+            super(start, type);
+            this.setCoordBaseMode(facing);
+            this.boundingBox = boundingBox;
+            this.cropTypeA = this.getRandomCropType(rand);
+            this.cropTypeB = this.getRandomCropType(rand);
+        }
+
+        /**
+         * (abstract) Helper method to write subclass data to NBT
+         */
+        protected void writeStructureToNBT(NBTTagCompound tagCompound)
+        {
+            super.writeStructureToNBT(tagCompound);
+            tagCompound.setInteger("CA", Block.REGISTRY.getIDForObject(this.cropTypeA));
+            tagCompound.setInteger("CB", Block.REGISTRY.getIDForObject(this.cropTypeB));
+        }
+
+        /**
+         * (abstract) Helper method to read subclass data from NBT
+         */
+        protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager tManager)
+        {
+            super.readStructureFromNBT(tagCompound, tManager);
+            this.cropTypeA = Block.getBlockById(tagCompound.getInteger("CA"));
+            this.cropTypeB = Block.getBlockById(tagCompound.getInteger("CB"));
+        }
+
+        private Block getRandomCropType(Random rand)
+        {
+            switch (rand.nextInt(10))
+            {
+                case 0:
+                case 1:
+                    return Blocks.CARROTS;
+                case 2:
+                case 3:
+                    return Blocks.POTATOES;
+                case 4:
+                    return Blocks.BEETROOTS;
+                default:
+                    return Blocks.WHEAT;
+            }
+        }
+
+        public static VillageMod.FarmHouse createPiece(VillageMod.Start start, List<StructureComponent> structureComponents, Random rand, int structureMinX, int structureMinY, int structureMinZ, EnumFacing facing, int type)
+        {
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(structureMinX, structureMinY, structureMinZ, 0, 0, 0, 13, 7, 14, facing);
+            return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(structureComponents, structureboundingbox) == null ? new VillageMod.FarmHouse(start, type, rand, structureboundingbox, facing) : null;
+        }
+
+        /**
+         * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * Mineshafts at the end, it adds Fences...
+         */
+        public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
+        {
+            if (this.averageGroundLvl < 0)
+            {
+                this.averageGroundLvl = this.getAverageGroundLevel(worldIn, structureBoundingBoxIn);
+
+                if (this.averageGroundLvl < 0)
+                {
+                    return true;
+                }
+
+                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 4 - 1, 0);
+            }
+
+
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 1, 0, 1, 5, Blocks.SPRUCE_FENCE.getDefaultState(), Blocks.SPRUCE_FENCE.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 9, 1, 0, Blocks.SPRUCE_FENCE.getDefaultState(), Blocks.SPRUCE_FENCE.getDefaultState(), false);
+
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 9, 1, 1, 0, 1, 5, Blocks.SPRUCE_FENCE.getDefaultState(), Blocks.SPRUCE_FENCE.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 1, 0, 9, 1, 0, Blocks.SPRUCE_FENCE.getDefaultState(), Blocks.SPRUCE_FENCE.getDefaultState(), false);
+
+
+
+            IBlockState iblockstate = this.getBiomeSpecificBlockState(Blocks.LOG.getDefaultState());
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 1, 0, 6, 4, 8, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 1, 2, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 4, 0, 1, 5, 0, 7, Blocks.FARMLAND.getDefaultState(), Blocks.FARMLAND.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 8, iblockstate, iblockstate, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 6, 0, 0, 6, 0, 8, iblockstate, iblockstate, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 0, 5, 0, 0, iblockstate, iblockstate, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 1, 0, 8, 5, 0, 8, iblockstate, iblockstate, false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 3, 0, 1, 3, 0, 7, Blocks.WATER.getDefaultState(), Blocks.WATER.getDefaultState(), false);
+
+            for (int i = 1; i <= 7; ++i)
+            {
+                int j = ((BlockCrops)this.cropTypeA).getMaxAge();
+                int k = j / 3;
+                this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 1, 1, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 2, 1, i, structureBoundingBoxIn);
+                int l = ((BlockCrops)this.cropTypeB).getMaxAge();
+                int i1 = l / 3;
+                this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 4, 1, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, this.cropTypeB.getStateFromMeta(MathHelper.getInt(randomIn, i1, l)), 5, 1, i, structureBoundingBoxIn);
+            }
+
+            for (int j1 = 0; j1 < 9; ++j1)
+            {
+                for (int k1 = 0; k1 < 7; ++k1)
+                {
+                    this.clearCurrentPositionBlocksUpwards(worldIn, k1, 4, j1, structureBoundingBoxIn);
+                    this.replaceAirAndLiquidDownwards(worldIn, Blocks.DIRT.getDefaultState(), k1, -1, j1, structureBoundingBoxIn);
+                }
+            }
+
+            return true;
+        }
+    }
+
     public static class Field2 extends VillageMod.Village
     {
         /** First crop type for this field. */
@@ -1121,7 +1256,7 @@ public class VillageMod {
         }
 
         /**
-         * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
          * Mineshafts at the end, it adds Fences...
          */
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
@@ -1173,6 +1308,119 @@ public class VillageMod {
         }
     }
 
+    public static class BigField extends VillageMod.Village
+    {
+        /** First crop type for this field. */
+        private Block cropTypeA;
+
+        public BigField()
+        {
+        }
+
+        public BigField(VillageMod.Start start, int p_i45569_2_, Random rand, StructureBoundingBox p_i45569_4_, EnumFacing facing)
+        {
+            super(start, p_i45569_2_);
+            this.setCoordBaseMode(facing);
+            this.boundingBox = p_i45569_4_;
+            this.cropTypeA = this.getRandomCropType(rand);
+        }
+
+        /**
+         * (abstract) Helper method to write subclass data to NBT
+         */
+        protected void writeStructureToNBT(NBTTagCompound tagCompound)
+        {
+            super.writeStructureToNBT(tagCompound);
+            tagCompound.setInteger("CA", Block.REGISTRY.getIDForObject(this.cropTypeA));
+            //tagCompound.setInteger("CB", Block.REGISTRY.getIDForObject(this.cropTypeB));
+        }
+
+        /**
+         * (abstract) Helper method to read subclass data from NBT
+         */
+        protected void readStructureFromNBT(NBTTagCompound tagCompound, TemplateManager p_143011_2_)
+        {
+            super.readStructureFromNBT(tagCompound, p_143011_2_);
+            this.cropTypeA = Block.getBlockById(tagCompound.getInteger("CA"));
+            //this.cropTypeB = Block.getBlockById(tagCompound.getInteger("CB"));
+        }
+
+        private Block getRandomCropType(Random rand)
+        {
+            switch (rand.nextInt(10))
+            {
+                case 0:
+                case 1:
+                    return Blocks.CARROTS;
+                case 2:
+                case 3:
+                    return Blocks.POTATOES;
+                case 4:
+                    return Blocks.BEETROOTS;
+                default:
+                    return Blocks.WHEAT;
+            }
+        }
+
+        public static VillageMod.BigField createPiece(VillageMod.Start start, List<StructureComponent> p_175852_1_, Random rand, int p_175852_3_, int p_175852_4_, int p_175852_5_, EnumFacing facing, int p_175852_7_)
+        {
+            StructureBoundingBox structureboundingbox = StructureBoundingBox.getComponentToAddBoundingBox(p_175852_3_, p_175852_4_, p_175852_5_, 0, 0, 0, 7, 4, 9, facing);
+            return canVillageGoDeeper(structureboundingbox) && StructureComponent.findIntersecting(p_175852_1_, structureboundingbox) == null ? new VillageMod.BigField(start, p_175852_7_, rand, structureboundingbox, facing) : null;
+        }
+
+        /**
+         * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * Mineshafts at the end, it adds Fences...
+         */
+        public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
+        {
+            if (this.averageGroundLvl < 0)
+            {
+                this.averageGroundLvl = this.getAverageGroundLevel(worldIn, structureBoundingBoxIn);
+                if (this.averageGroundLvl < 0)
+                {
+                    return true;
+                }
+                this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 4 - 1, 0);
+            }
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 4, 0, 0, Blocks.OAK_FENCE.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 0, 0, 0, 12, Blocks.OAK_FENCE.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 8, 0, 0, 12, 0, 0, Blocks.OAK_FENCE.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 12, 0, 0, 12, 0, 12, Blocks.OAK_FENCE.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 0, 0, 12, 12, 0, 12, Blocks.OAK_FENCE.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 0, 5, 7, 0, 7, Blocks.STONE_BRICK_STAIRS.getDefaultState(), Blocks.AIR.getDefaultState(), false);
+            this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 5, 1, 5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 5, 1, 7, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 7, 1, 5, structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.OAK_FENCE.getDefaultState(), 7, 1, 7, structureBoundingBoxIn);
+            this.fillWithBlocks(worldIn, structureBoundingBoxIn, 5, 2, 5, 7, 2, 7, Blocks.STONE_SLAB.getDefaultState(), Blocks.STONE_SLAB.getDefaultState(), false);
+            for(int i = 2; i <= 10; i++) {
+                this.setBlockState(worldIn, Blocks.FARMLAND.getDefaultState(), 2, -1, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, Blocks.FARMLAND.getDefaultState(), 3, -1, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, Blocks.FARMLAND.getDefaultState(), 4, -1, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, Blocks.FARMLAND.getDefaultState(), 8, -1, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, Blocks.FARMLAND.getDefaultState(), 9, -1, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, Blocks.FARMLAND.getDefaultState(), 10, -1, i, structureBoundingBoxIn);
+            }
+            for (int i = 2; i <= 10; ++i)
+            {
+                int j = ((BlockCrops)this.cropTypeA).getMaxAge();
+                int k = j / 3;
+                this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 2, 0, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 3, 0, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 4, 0, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 8, 0, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 9, 0, i, structureBoundingBoxIn);
+                this.setBlockState(worldIn, this.cropTypeA.getStateFromMeta(MathHelper.getInt(randomIn, k, j)), 10, 0, i, structureBoundingBoxIn);
+            }
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 6, 0, 6,  structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 6, -1, 6,  structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.WATER.getDefaultState(), 6, 0, 6,  structureBoundingBoxIn);
+            this.setBlockState(worldIn, Blocks.WATER.getDefaultState(), 6, -1, 6,  structureBoundingBoxIn);
+            return true;
+        }
+    }
+
     public static class Torch extends VillageMod.Village
     {
         public Torch()
@@ -1195,7 +1443,7 @@ public class VillageMod {
         }
 
         /**
-         * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
          * Mineshafts at the end, it adds Fences...
          */
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
@@ -1274,7 +1522,7 @@ public class VillageMod {
         }
 
         /**
-         * Initiates construction of the Structure Component picked, at the current Location of StructGen
+         * Initiates construction of the StructureDunge Component picked, at the current Location of StructGen
          */
         public void buildComponent(StructureComponent componentIn, List<StructureComponent> listIn, Random rand)
         {
@@ -1359,7 +1607,7 @@ public class VillageMod {
         }
 
         /**
-         * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes
+         * second Part of StructureDunge generating, this for example places Spiderwebs, Mob Spawners, it closes
          * Mineshafts at the end, it adds Fences...
          */
         public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox structureBoundingBoxIn)
